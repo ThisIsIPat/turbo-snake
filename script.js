@@ -49,32 +49,16 @@ function tick() {
             let oldSnakeY = snake[0][1];
             switch(direction) {
                 case 'N':
-                    if (oldSnakeY <= 0) {
-                        snake.unshift([oldSnakeX, GRID_HEIGHT - 1]);
-                    } else {
-                        snake.unshift([oldSnakeX, oldSnakeY - 1]);
-                    }
+                    snake.unshift([oldSnakeX, ((oldSnakeY <= 0) ? GRID_HEIGHT : oldSnakeY) - 1]);
                     break;
                 case 'W':
-                    if (oldSnakeX <= 0) {
-                        snake.unshift([GRID_WIDTH - 1, oldSnakeY]);
-                    } else {
-                        snake.unshift([oldSnakeX - 1, oldSnakeY]);
-                    }
+                    snake.unshift([((oldSnakeX <= 0) ? GRID_WIDTH : oldSnakeX) - 1, oldSnakeY]);
                     break;
                 case 'S':
-                    if (oldSnakeY >= GRID_HEIGHT - 1) {
-                        snake.unshift([oldSnakeX, 0]);
-                    } else {
-                        snake.unshift([oldSnakeX, oldSnakeY + 1]);
-                    }
+                    snake.unshift([oldSnakeX, ((oldSnakeY >= GRID_HEIGHT - 1) ? 0 : (oldSnakeY + 1))]);
                     break;
                 case 'E':
-                    if (oldSnakeX >= GRID_WIDTH - 1) {
-                        snake.unshift([0, oldSnakeY]);
-                    } else {
-                        snake.unshift([oldSnakeX + 1, oldSnakeY]);
-                    }
+                    snake.unshift([((oldSnakeX >= GRID_WIDTH - 1) ? 0 : oldSnakeX + 1), oldSnakeY]);
                     break;
             }
             oldDirection = direction;
@@ -82,7 +66,7 @@ function tick() {
                 snake.pop();
             } else {
                 if (snake.length == GRID_WIDTH * GRID_HEIGHT) {
-                    alert('POGCHAMP WTF YOU WON!!!!!');
+                    alert('You won! :) PagChomp');
 
                     clearInterval(intervalId);
                     return;
@@ -93,8 +77,8 @@ function tick() {
 
                 appleLoop:
                 while (true) {
-                    for (let snek = 0; snek < snake.length; snek++) {
-                        if (snake[snek][0] == apple[0] && snake[snek][1] == apple[1]) {
+                    for (let appleRespawnSnakeBodyIndex = 0; appleRespawnSnakeBodyIndex < snake.length; appleRespawnSnakeBodyIndex++) {
+                        if (snake[appleRespawnSnakeBodyIndex][0] == apple[0] && snake[appleRespawnSnakeBodyIndex][1] == apple[1]) {
                             apple = [Math.floor(Math.random() * GRID_WIDTH), Math.floor(Math.random() * GRID_HEIGHT)];
                             continue appleLoop;
                         }
@@ -105,9 +89,9 @@ function tick() {
                 draw(apple[0], apple[1], "red");
             }
             var snakeHead = snake[0]
-            for (let snek = 1; snek < snake.length; snek++) {
-                if (snake[snek][0] == snakeHead[0] && snake[snek][1] == snakeHead[1]) {
-                    alert('LOOOOL YOU LOST');
+            for (let losingSnakeBodyIndex = 1; losingSnakeBodyIndex < snake.length; losingSnakeBodyIndex++) {
+                if (snake[losingSnakeBodyIndex][0] == snakeHead[0] && snake[losingSnakeBodyIndex][1] == snakeHead[1]) {
+                    alert('You lost, better luck next time! PepeLaugh');
 
                     clearInterval(intervalId);
                     return;
