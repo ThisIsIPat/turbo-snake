@@ -1,1 +1,1 @@
-Snake
+This Snake game was created within one hour, because I like procrastinating learning for exams and wanted to learn some JS.
