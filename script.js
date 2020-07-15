@@ -111,5 +111,5 @@ function draw(x, y, color) {
     ctx.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE - 1, PIXEL_SIZE - 1);
 }
 
-var intervalId = setInterval(tick, 700);
+var intervalId = setInterval(tick, SNAKE_START_SPEED);
 tick(); // To start 0ms tick
